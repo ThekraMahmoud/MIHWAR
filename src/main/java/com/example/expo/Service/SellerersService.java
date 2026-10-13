@@ -1,10 +1,10 @@
 package com.example.expo.Service;
 
 import com.example.expo.Api.ApiException;
-import com.example.expo.DTO.MerchantRequest;
-import com.example.expo.Model.Merchants;
+import com.example.expo.DTO.SellerRequest;
+import com.example.expo.Model.Sellerers;
 import com.example.expo.Repository.InvoicesRepository;
-import com.example.expo.Repository.MerchantRepository;
+import com.example.expo.Repository.SellersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,73 +13,73 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class MerchantsService {
-    private final MerchantRepository merchantRepository;
+public class SellerersService {
+    private final SellersRepository sellersRepository;
     private final InvoicesRepository invoicesRepository;
 
 
-    public List<Merchants> getAll()
+    public List<Sellerers> getAll()
     {
-        return merchantRepository.findAll();
+        return sellersRepository.findAll();
     }
 
 
-    public void addMerchant(MerchantRequest request) {
-        Merchants merchant = new Merchants();
+    public void addSeller(SellerRequest request) {
+        Sellerers seller = new Sellerers();
 
-        merchant.setBusiness_name(request.getBusiness_name());
-        merchant.setEmail(request.getEmail());
-        merchant.setPhone(request.getPhone());
-        merchant.setPassword(request.getPassword());
-        merchant.setCommercial_register(request.getCommercial_register());
+        seller.setBusiness_name(request.getBusiness_name());
+        seller.setEmail(request.getEmail());
+        seller.setPhone(request.getPhone());
+        seller.setPassword(request.getPassword());
+        seller.setCommercial_register(request.getCommercial_register());
 
         // قيم يحددها النظام.
-        merchant.setVerification_status("PENDING");
-        merchant.setStatus("ACTIVE");
+        seller.setVerification_status("PENDING");
+        seller.setStatus("ACTIVE");
 
         LocalDate today = LocalDate.now();
-        merchant.setCreated_at(today);
-        merchant.setUpdated_at(today);
-        merchantRepository.save(merchant);
+        seller.setCreated_at(today);
+        seller.setUpdated_at(today);
+        sellersRepository.save(seller);
 
 
     }
 
-    public void updateMerchant(Integer merchantId, MerchantRequest request) {
-        Merchants oldMerchant =
-                merchantRepository.findMerchantById(merchantId);
+    public void updateSeller(Integer sellerId, SellerRequest request) {
+        Sellerers oldSeller =
+                sellersRepository.findSellerById(sellerId);
 
-        if (oldMerchant == null) {
-            throw new ApiException("merchant id not found");
+        if (oldSeller == null) {
+            throw new ApiException("seller id not found");
         }
 
-        oldMerchant.setBusiness_name(request.getBusiness_name());
-        oldMerchant.setEmail(request.getEmail());
-        oldMerchant.setPhone(request.getPhone());
-        oldMerchant.setPassword(request.getPassword());
-        oldMerchant.setCommercial_register(request.getCommercial_register());
+        oldSeller.setBusiness_name(request.getBusiness_name());
+        oldSeller.setEmail(request.getEmail());
+        oldSeller.setPhone(request.getPhone());
+        oldSeller.setPassword(request.getPassword());
+        oldSeller.setCommercial_register(request.getCommercial_register());
 
         // تغيير بيانات التسجيل يلغي التوثيق السابق.
-        if ("VERIFIED".equals(oldMerchant.getVerification_status())) {
-            oldMerchant.setVerification_status("PENDING");
+        if ("VERIFIED".equals(oldSeller.getVerification_status())) {
+            oldSeller.setVerification_status("PENDING");
         }
 
         // لا نغيّر created_at أو status من هذا الطلب.
-        oldMerchant.setUpdated_at(LocalDate.now());
+        oldSeller.setUpdated_at(LocalDate.now());
 
-        merchantRepository.save(oldMerchant);
+        sellersRepository.save(oldSeller);
     }
 
-    public void deleteMerchant(Integer merchantId){
-        Merchants oldMerchant= merchantRepository.findMerchantById(merchantId);
+    public void deleteSeller(Integer sellerId){
+        Sellerers oldSeller= sellersRepository.findSellerById(sellerId);
 
-        if(oldMerchant==null){
-            throw new ApiException("merchant id not found");
+        if(oldSeller==null){
+            throw new ApiException("seller id not found");
         }
-        if(invoicesRepository.existsByMerchant_Id(merchantId)){
-            throw new ApiException("can not delete merchant with invoices");
+        if(invoicesRepository.existsBySeller_Id(sellerId)){
+            throw new ApiException("can not delete seller with invoices");
         }
-        merchantRepository.delete(oldMerchant);
+        sellersRepository.delete(oldSeller);
     }
 
 

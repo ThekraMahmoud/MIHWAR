@@ -10,14 +10,14 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class MerchantWallets {
-
+public class SellerersWallets {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class MerchantWallets {
     @PositiveOrZero(message = "Balance must be zero or greater")
     @Digits(integer = 10, fraction = 2)
     @Column(nullable = false, precision = 12, scale = 2)
-    private BigDecimal balance ;//لازم نسند لها قيمة بالسيرفس
+    private BigDecimal balance;//لازم نسند لها قيمة بالسيرفس
 
     @NotBlank(message = "Currency is required")
     @Size(max = 10, message = "Currency must not exceed 10 characters")
@@ -53,19 +53,18 @@ public class MerchantWallets {
     @Column(nullable = false)
     private LocalDateTime updated_at;
 
-
-
-
-
     /////////////////Relation
 
-    // كل محفظة مرتبطة بتاجر واحد، وكل تاجر له محفظة واحدة كحد أقصى.
-    @NotNull(message = "Merchant is required")
+    //كل محفظة مرتبطة ببائع واحد
+    @NotNull(message = "Seller is required")
     @OneToOne(optional = false)
-    @JoinColumn(name = "merchant_id", nullable = false, unique = true)
+    @JoinColumn(name = "seller_id", nullable = false, unique = true)
     @JsonIgnore
-    private Merchants merchant;
+    private Sellerers seller;
 
 
-
+    //كل محفظة لها اكثر من معاملة
+    @JsonIgnore
+    @OneToMany(mappedBy = "sellerWallet")
+    private List<SellerWallerTransaction> sellerWalletTransactions;
 }

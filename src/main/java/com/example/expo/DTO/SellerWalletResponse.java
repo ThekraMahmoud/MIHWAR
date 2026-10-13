@@ -10,10 +10,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 
 //للعرض
-public class MerchantWalletResponse {
+public class SellerWalletResponse {
 
     private Integer id;
-    private Integer merchant_id;
+    private Integer seller_id;
     private BigDecimal balance;
     private String currency;
     private String status;

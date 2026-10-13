@@ -2,7 +2,7 @@ package com.example.expo.Controller;
 
 import com.example.expo.Api.ApiResponse;
 import com.example.expo.DTO.SellerRequest;
-import com.example.expo.Model.Merchants;
+import com.example.expo.Model.Sellerers;
 import com.example.expo.Service.SellerersService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -13,30 +13,30 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/v1/merchant")
-public class MerchantController {
+@RequestMapping("/api/v1/seller")
+public class SellerController {
 
     private final SellerersService sellerersService;
 
     @GetMapping("/get")
-    public ResponseEntity<?> getAllMerchant(){
-        List<Merchants> merchantList= sellerersService.getAll();
-        return ResponseEntity.status(200).body(merchantList);
+    public ResponseEntity<?> getAllSeller(){
+        List<Sellerers> sellerList= sellerersService.getAll();
+        return ResponseEntity.status(200).body(sellerList);
     }
     @PostMapping("/add")
-    public ResponseEntity<?>addMerchant(@RequestBody @Valid SellerRequest merchant){
-        sellerersService.addMerchant(merchant);
+    public ResponseEntity<?>addSeller(@RequestBody @Valid SellerRequest seller){
+        sellerersService.addSeller(seller);
         return ResponseEntity.status(200).body(new ApiResponse("added done"));
     }
 
-    @PutMapping("/update/{merchantId}")
-    public ResponseEntity<?>updateMerchant(@PathVariable Integer merchantId,@RequestBody @Valid SellerRequest merchant){
-        sellerersService.updateMerchant(merchantId,merchant);
+    @PutMapping("/update/{sellerId}")
+    public ResponseEntity<?>updateSeller(@PathVariable Integer sellerId,@RequestBody @Valid SellerRequest seller){
+        sellerersService.updateSeller(sellerId,seller);
         return ResponseEntity.status(200).body(new ApiResponse("updated done"));
     }
-    @DeleteMapping("/delete/{merchantId}")
-    public ResponseEntity<?>deleteMerchant(@PathVariable Integer merchantId){
-        sellerersService.deleteMerchant(merchantId);
+    @DeleteMapping("/delete/{sellerId}")
+    public ResponseEntity<?>deleteSeller(@PathVariable Integer sellerId){
+        sellerersService.deleteSeller(sellerId);
         return ResponseEntity.status(200).body(new ApiResponse("deleted done"));
     }
 

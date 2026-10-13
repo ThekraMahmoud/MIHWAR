@@ -13,10 +13,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MerchantWalltsRequest {
-    @NotNull(message = "Merchant ID is required")
-    @Positive(message = "Merchant ID must be positive")
-    private Integer merchant_id;
+public class SellerWalletsRequest {
+    @NotNull(message = "Seller ID is required")
+    @Positive(message = "Seller ID must be positive")
+    private Integer seller_id;
 
     @NotBlank(message = "Currency is required")
     @Size(max = 10, message = "Currency must not exceed 10 characters")
