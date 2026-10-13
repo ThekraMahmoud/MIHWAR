@@ -22,7 +22,7 @@ public class MerchantWallets {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
-    private Long id;
+    private Integer id;
 
     @NotNull(message = "Balance is required")
     @PositiveOrZero(message = "Balance must be zero or greater")
