@@ -1,8 +1,8 @@
 package com.example.expo.Service;
 
 import com.example.expo.Api.ApiException;
-import com.example.expo.DTO.MerchantRequest;
-import com.example.expo.Model.Merchants;
+import com.example.expo.DTO.SellerRequest;
+import com.example.expo.Model.Seller;
 import com.example.expo.Repository.InvoicesRepository;
 import com.example.expo.Repository.MerchantRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,14 +18,14 @@ public class MerchantsService {
     private final InvoicesRepository invoicesRepository;
 
 
-    public List<Merchants> getAll()
+    public List<Seller> getAll()
     {
         return merchantRepository.findAll();
     }
 
 
-    public void addMerchant(MerchantRequest request) {
-        Merchants merchant = new Merchants();
+    public void addMerchant(SellerRequest request) {
+        Seller merchant = new Seller();
 
         merchant.setBusiness_name(request.getBusiness_name());
         merchant.setEmail(request.getEmail());
@@ -45,8 +45,8 @@ public class MerchantsService {
 
     }
 
-    public void updateMerchant(Integer merchantId, MerchantRequest request) {
-        Merchants oldMerchant =
+    public void updateMerchant(Integer merchantId, SellerRequest request) {
+        Seller oldMerchant =
                 merchantRepository.findMerchantById(merchantId);
 
         if (oldMerchant == null) {
@@ -71,7 +71,7 @@ public class MerchantsService {
     }
 
     public void deleteMerchant(Integer merchantId){
-        Merchants oldMerchant= merchantRepository.findMerchantById(merchantId);
+        Seller oldMerchant= merchantRepository.findMerchantById(merchantId);
 
         if(oldMerchant==null){
             throw new ApiException("merchant id not found");

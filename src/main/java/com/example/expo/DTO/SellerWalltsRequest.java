@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MerchantWalltsRequest {
+public class SellerWalltsRequest {
     @NotNull(message = "Merchant ID is required")
     @Positive(message = "Merchant ID must be positive")
     private Integer merchant_id;

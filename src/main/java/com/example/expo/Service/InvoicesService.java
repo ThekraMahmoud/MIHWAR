@@ -3,13 +3,12 @@ package com.example.expo.Service;
 import com.example.expo.Api.ApiException;
 import com.example.expo.DTO.InvoiceRequest;
 import com.example.expo.Model.Invoices;
-import com.example.expo.Model.Merchants;
+import com.example.expo.Model.Seller;
 import com.example.expo.Repository.InvoicesRepository;
 import com.example.expo.Repository.MerchantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class InvoicesService {
         return invoicesRepository.findAll();
     }
     public void addInvoice(Integer merchantId, InvoiceRequest request) {
-        Merchants merchant = merchantRepository.findMerchantById(merchantId);
+        Seller merchant = merchantRepository.findMerchantById(merchantId);
 
         if (merchant == null) {
             throw new ApiException("merchant id not found");
@@ -60,7 +59,7 @@ public class InvoicesService {
     }
 
 //    public void addInvoice(Integer merchantId, Invoices invoice) {
-//        Merchants merchant = merchantRepository.findMerchantById(merchantId);
+//        Seller merchant = merchantRepository.findMerchantById(merchantId);
 //
 //        if (merchant == null) {
 //            throw new ApiException("merchant id not found");

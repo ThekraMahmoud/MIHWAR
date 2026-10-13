@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MerchantRequest {
+public class SellerRequest {
 
     @NotBlank
     @Size(max = 150)

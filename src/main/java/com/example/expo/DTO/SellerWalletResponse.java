@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 
 //للعرض
-public class MerchantWalletResponse {
+public class SellerWalletResponse {
 
     private Long id;
     private Integer merchant_id;

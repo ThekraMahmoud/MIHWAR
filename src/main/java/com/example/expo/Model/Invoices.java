@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 
@@ -95,7 +94,7 @@ public class Invoices {
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "merchant_id", nullable = false)//حتى لو ماكتبت اسم الميرشنت _اي دي هيكون مكتوب باي ديفولت
-    private Merchants merchant;
+    private Seller merchant;
 
 
     @ManyToOne

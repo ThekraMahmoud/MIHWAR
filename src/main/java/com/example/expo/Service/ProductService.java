@@ -2,7 +2,7 @@
 package com.example.expo.Service;
 
 import com.example.expo.Api.ApiException;
-import com.example.expo.Model.Merchants;
+import com.example.expo.Model.Seller;
 import com.example.expo.Model.Product;
 import com.example.expo.Repository.MerchantRepository;
 import com.example.expo.Repository.ProductRepository;
@@ -24,7 +24,7 @@ public class ProductService {
 
     public List<Product> getProductsByMerchant(Integer merchantId) {
 
-        Merchants merchant =
+        Seller merchant =
                 merchantRepository.findMerchantById(merchantId);
 
         if (merchant == null) {
@@ -47,7 +47,7 @@ public class ProductService {
 
     public void addProduct(Integer merchantId, Product product) {
 
-        Merchants merchant =
+        Seller merchant =
                 merchantRepository.findMerchantById(merchantId);
 
         if (merchant == null) {

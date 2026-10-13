@@ -52,5 +52,5 @@ public class Product {
     @ManyToOne(optional = false)
     @JoinColumn(name = "merchant_id", nullable = false)
     @JsonIgnore
-    private Merchants merchant;
+    private Seller merchant;
 }

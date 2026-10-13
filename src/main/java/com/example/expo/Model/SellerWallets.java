@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class MerchantWallets {
+public class SellerWallets {
 
 
     @Id
@@ -64,7 +64,7 @@ public class MerchantWallets {
     @OneToOne(optional = false)
     @JoinColumn(name = "merchant_id", nullable = false, unique = true)
     @JsonIgnore
-    private Merchants merchant;
+    private Seller merchant;
 
 
 

@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Merchants {
+public class Seller {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -102,6 +102,6 @@ public class Merchants {
 
     @JsonIgnore
     @OneToOne(mappedBy = "merchant")
-    private MerchantWallets merchantWallets;
+    private SellerWallets merchantWallets;
 
 }

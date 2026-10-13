@@ -1,8 +1,8 @@
 package com.example.expo.Service;
 
 import com.example.expo.Api.ApiException;
-import com.example.expo.DTO.MerchantWalletResponse;
-import com.example.expo.Model.MerchantWallets;
+import com.example.expo.DTO.SellerWalletResponse;
+import com.example.expo.Model.SellerWallets;
 import com.example.expo.Repository.MerchantWalletsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,9 +18,9 @@ public class MerchantWalletsService {
     private final MerchantWalletsRepository merchantWalletsRepository;
 
 //get all
-    public List<MerchantWalletResponse> getAll() {
-        List<MerchantWallets> wallets = merchantWalletsRepository.findAll();
-        List<MerchantWalletResponse> responses = new ArrayList<>();
+    public List<SellerWalletResponse> getAll() {
+        List<SellerWallets> wallets = merchantWalletsRepository.findAll();
+        List<SellerWalletResponse> responses = new ArrayList<>();
 
         for (int i = 0; i < wallets.size(); i++) {//مشينا ع كل الميرشنت ولت واضفناها داخل الريسبونس واعدنا فقط القيم الي نحتاجها في الرسيبونس
             responses.add(toResponse(wallets.get(i)));
@@ -30,8 +30,8 @@ public class MerchantWalletsService {
     }
 
 //اسندت القيم الي بالمحفظة الى القيم بالرسيبونس
-    private MerchantWalletResponse toResponse(MerchantWallets wallet) {
-        return new MerchantWalletResponse(
+    private SellerWalletResponse toResponse(SellerWallets wallet) {
+        return new SellerWalletResponse(
                 wallet.getId(),
                 wallet.getMerchant().getId(),
                 wallet.getBalance(),
@@ -42,7 +42,7 @@ public class MerchantWalletsService {
 
 
     public void deleteWallet(Integer walletId) {
-        MerchantWallets wallet = merchantWalletsRepository.findMerchantWalletsById(walletId);
+        SellerWallets wallet = merchantWalletsRepository.findMerchantWalletsById(walletId);
 
         if (wallet == null) {
             throw new ApiException("wallet id not found");
